@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Events</title>
+</head>
+<body>
+    <div class="note">JS Custom Event Demo</div>
+
+    <script>
+        // function highlight(elem, callback) {
+        //     const bgColor = 'yellow';
+        //     elem.style.backgroundColor = bgColor;
+
+        //     if(callback && typeof callback === 'function') {
+        //         callback(elem);
+        //     }
+        // }
+        // let note = document.querySelector('.note');
+        // function addBoreder(elem) {
+        //     elem.style.border = 'solid 1px red';
+        // }
+        // highlight(note, addBoreder);
+
+        function highlight(elem) {
+            const bgColor = 'yellow';
+            elem.style.backgroundColor = 'yellow';
+
+            let event = new CustomEvent('highlight', {
+                detail: {
+                    backgroundColor: bgColor
+                }
+            });
+            elem.dispatchEvent(event);
+        }
+        let div = document.querySelector('.note');
+        function addBorder(elem) {
+            elem.style.border = '1px solid red';
+        }
+        div.addEventListener('highlight', function(e) {
+            addBorder(this);
+            console.log(e.detail);
+        });
+        highlight(div);
+    </script>
+</body>
+</html>
